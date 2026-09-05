@@ -1,0 +1,47 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_chatbot
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: chatbot_db
+      MYSQL_USER: chatbot_user
+      MYSQL_PASSWORD: chatbot_pass
+    ports:
+      - "3400:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    container_name: backend_chatbot
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - ./src/backend:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./src/backend/.env
+    environment:
+      DATABASE_URL: mysql+pymysql://chatbot_user:chatbot_pass@mysql:3306/chatbot_db
+    depends_on:
+      - mysql
+
+  frontend:
+    image: node:18
+    container_name: frontend_chatbot
+    working_dir: /app
+    volumes:
+      - ./src/frontend:/app
+      - /app/node_modules
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

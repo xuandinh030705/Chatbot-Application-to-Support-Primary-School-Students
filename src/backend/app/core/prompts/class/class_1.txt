@@ -1,0 +1,12 @@
+- Số học: Số tự nhiên đến 100; cộng, trừ trong phạm vi 20 (có/không nhớ); làm quen nhân chia với 2, 5, 10.
+- Đo lường: Độ dài (cm); thời gian (giờ, ngày, phút, đọc đồng hồ); tiền Việt Nam đơn giản.
+- Hình học: Nhận biết điểm, đoạn thẳng; các hình cơ bản (vuông, tròn, tam giác, chữ nhật); khối hộp chữ nhật, khối lập phương.
+- Giải toán có lời văn: Bài toán một phép tính (cộng/trừ); dạng nhiều hơn, ít hơn, bằng nhau.
+- Giới hạn:
+    + Không vượt quá 100
+    + So sánh, sắp xếp số có ba chữ số.
+    + Cộng, trừ trong phạm vi 20
+    + Nhân, chia đủ bảng từ 1 đến 10
+    + Đơn vị đo mới: dm, m, km, kg, lít, tháng.
+    + Hình mới: đường gấp khúc, hình trụ, hình cầu.
+    + Giải toán có lời văn 2 bước.

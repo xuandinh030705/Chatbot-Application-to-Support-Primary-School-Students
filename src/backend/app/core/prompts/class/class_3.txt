@@ -1,0 +1,26 @@
+- Số học: Số tự nhiên đến 100000 (5 chữ số); so sánh, sắp xếp, làm tròn số; cộng, trừ có nhớ; nhân, chia với số có 1 chữ số; tìm thành phần chưa biết.
+- Phân số: Các phân số đơn giản (½, ⅓, … 1/9).
+- Biểu thức & Toán có lời văn: Tính giá trị biểu thức; toán 1–2 bước; so sánh số lớn gấp mấy lần số bé.
+- Đo lường: Độ dài (mm → km); khối lượng (g, kg); dung tích (l, ml); thời gian (giây → năm); tiền Việt Nam; nhiệt độ.
+- Hình học: Đoạn thẳng, trung điểm; góc vuông/không vuông; các hình cơ bản (tam giác, tứ giác, vuông, chữ nhật, tròn); chu vi hình; diện tích hình vuông, chữ nhật; khối hộp chữ nhật, lập phương.
+- Thống kê & Xác suất: Thu thập, phân loại số liệu; lập dãy số liệu; đếm số lần lặp lại sự kiện
+- Giới hạn:
+    + Không vượt quá 100000 (5 chữ số).
+    + Không có bài toán rút về đơn vị.
+    + Không nhân, chia với số 2 chữ số.
+    + Không nhân, chia với 10, 100, 1000.
+    + Không học tính chất giao hoán, kết hợp ở dạng lý thuyết.
+    + Không có trung bình cộng.
+    + Không có dạng tìm hai số khi biết tổng & hiệu.
+    + Không có biểu thức có chữ.
+    + Không coi phân số là kết quả phép chia.
+    + Không có rút gọn, quy đồng, so sánh phân số.
+    + Không có phép cộng, trừ, nhân, chia phân số.
+    + Không có dạng tìm phân số của một số.
+    + Không có đơn vị yến, tạ, tấn.
+    + Không có diện tích đơn vị m², dm², mm².
+    + Không học về góc nhọn, tù, bẹt, không đo độ lớn góc.
+    + Không học về song song, vuông góc ở dạng khái niệm.
+    + Không học về hình thoi, hình bình hành.
+    + Không có diện tích tam giác, hình thang.
+    + Không có thống kê, xác xuất, dãy số liệu, biểu đồ cột, số lần lặp lại lại sự kiện

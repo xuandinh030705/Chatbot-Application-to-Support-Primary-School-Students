@@ -1,0 +1,58 @@
+{
+  "problem_types": [
+    {
+      "id": 1,
+      "topic": "Bài toán tổng tỉ, hiệu tỉ dạng tường minh",
+      "example": "Tỉ số giữa hai số là 0,4. Số lớn hơn số bé 45 đơn vị. Tìm hai số",
+      "solution": [
+        "Đổi 0,4 = 2/5",
+        "Ta có sơ đồ",
+        "Số bé: |---|---|",
+        "Số lớn: |---|---|---|---|---|",
+        "Giá trị 1 phần là: 45:(5-2) = 15",
+        "Số bé là: 15x2 = 30",
+        "Số lớn là: 30 + 45 = 75"
+      ]
+    },
+    {
+      "id": 2,
+      "topic": "Bài toán tổng - tỉ, hiệu - tỉ có tổng hoặc hiệu bị ẩn",
+      "example": "Cho phân số 35/45. Tìm số tự nhiên a sao cho khi ta bớt cả tử số và mẫu số đi a đơn vị thì ta được phân số 2/3.",
+      "solution": [
+        "Khi bớt cả tử số và mẫu số đi a đơn vị thì hiệu của mẫu số và tử số không thay đổi",
+        "Hiệu của mẫu và tử là: 45 – 35 = 10 (đơn vị)",
+        "Ta có sơ đồ lúc sau",
+        "Tử số: |---|---|",
+        "Mẫu số: |---|---|---|",
+        "Tử số lúc sau là: 10 × 2 = 20",
+        "Số a là: 35 – 20 = 15",
+        "Đáp số: 15"
+      ]
+    },
+    {
+      "id": 3,
+      "topic": "Bài toán dời dấu phẩy, quên dấu phẩy của số thập phân",
+      "example": "Tìm một số thập phân, biết rằng nếu dời dấu phẩy của số đó sang phải 1 chữ số ta sẽ được một số mới lớn hơn số phải tìm là 21,06",
+      "solution": [
+        "Khi dời dấu phẩy của số cần tìm sang phải 1 chữ số thì số đó đã gấp lên 10 lần",
+        "Vậy số lúc đầu là: 21,06 : (10-1) = 2,34"
+      ]
+    },
+    {
+      "id": 4,
+      "topic": "Bài toán về mối quan hệ giữa quãng đường, vận tốc, thời gian",
+      "example": "Một ô tô dự định đi từ A đến B với vận tốc 45km/giờ. Nhưng do trời trở gió mỗi giờ xe chỉ đi được 35km/giờ và đến B chậm 40 phút so với dự định. Tính thời gian thực tế người đó đi từ A đến B.",
+      "solution": [
+        "Gọi t_1 là thời gian đi với vận tốc 45km/giờ",
+        "t_2 là thời gian đi với vận tốc 35km/giờ",
+        "Trên cùng một quãng đường, tỉ số vận tốc bằng nghịch đảo tỉ số thời gian",
+        "Do đó t_1/t_2 = v_2/v_1 = 35/45 = 5/9",
+        "Ta có sơ đồ",
+        "Thời gian 1: |---|---|---|---|---|",
+        "Thời gian 2: |---|---|---|---|---|---|---|---|---|",
+        "Thời gian đi với vận tốc 35km/giờ là: 40 : (9-5) × 9 = 90 phút",
+        "Đáp số: 90 phút"
+      ]
+    }
+  ]
+}

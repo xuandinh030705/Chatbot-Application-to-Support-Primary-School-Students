@@ -1,0 +1,22 @@
+- Số tự nhiên: Số tự nhiên đến 999999 (6 chữ số); đọc, viết, so sánh, sắp xếp; dãy số tự nhiên; bài toán rút về đơn vị.
+- Phép tính với số tự nhiên: Cộng, trừ; tính chất giao hoán, kết hợp; nhân, chia với số 1–2 chữ số hoặc với 10, 100, 1000…; ước lượng thương; trung bình cộng; tìm hai số khi biết tổng & hiệu; biểu thức có chữ.
+- Phân số: Khái niệm; phân số & phép chia; phân số bằng nhau; rút gọn, quy đồng, so sánh.
+- Phép tính với phân số: Cộng, trừ (cùng/khác mẫu); nhân, chia phân số; tìm phân số của một số.
+- Đo lường: Đơn vị khối lượng (yến, tạ, tấn); thời gian (giây, thế kỉ); diện tích (m², dm², mm²), độ dài, dung tích, nhiệt độ.
+- Hình học:
+    + Góc: Đo góc nhọn, tù, bẹt. Giới hạn: Không tính góc phức tạp.
+    + Đường thẳng: Nhận biết song song, vuông góc. Giới hạn: Không tính toán.
+    + Hình cơ bản: Nhận biết hình bình hành, hình thoi; tính chu vi hình vuông, chữ nhật. Giới hạn: Không tính diện tích tam giác, hình thang.
+- Thống kê & Xác suất: Dãy số liệu; biểu đồ cột; số lần lặp lại sự kiện
+- GIỚI HẠN – CẤM SỬ DỤNG
+    + Không có tỉ số
+    + Không có số thập phân (chỉ làm việc với số nguyên), số âm.
+    + Không có làm tròn số thập phân, so sánh số thập phân (cái này sang lớp 5 mới học).
+    + Không có hỗn số, phân số thập phân, phần trăm (lớp 5).
+    + Không có số lớn hơn 6 chữ số (lớp 5 mới học đến hàng triệu).
+    + Không có căn bậc hai, lũy thừa.
+    + Không có phần trăm
+    + Không giải bài toán đòi hỏi quy luật nâng cao, chữ số tận cùng, dãy lũy thừa, mô-đun,…
+    + Không có diện tích tam giác, diện tích hình thang, hình tròn, thể tích hình hộp chữ nhật, hình lập phương
+    + Không có số thập phân, hỗn số, phần trăm, làm tròn số, lũy thừa, số nguyên tố, hợp số, ước chung, bội chung, ƯCLN, BCNN.
+    + Không có biểu đồ hình quạt, trung bình cộng nâng cao

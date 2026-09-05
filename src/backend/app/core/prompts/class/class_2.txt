@@ -1,0 +1,21 @@
+- Số học: Số tự nhiên đến 1000; so sánh, sắp xếp số có ba chữ số; cộng, trừ có nhớ; bảng nhân, chia đến 10.
+- Đo lường: Độ dài (dm, m, km); khối lượng (kg); dung tích (lít); thời gian (ngày, giờ, phút, tháng); tiền Việt Nam.
+- Hình học: Đoạn thẳng, đường gấp khúc; hình chữ nhật, hình tròn; khối hộp chữ nhật, lập phương, trụ, cầu.
+- Giải toán có lời văn: Bài toán 1–2 bước (cộng, trừ, nhân, chia)
+- Giới hạn:
+    + Không vượt quá 1000 (3 chữ số).
+    + Không có làm tròn số.
+    + Không có tìm thành phần chưa biết trong phép tính.
+    + Không có số đến 100 000 (5 chữ số).
+    + Chỉ có cộng, trừ trong phạm vi 1000.
+    + Nhân, chia chỉ trong bảng 1–10.
+    + Không có nhân, chia với số ngoài bảng (ví dụ 13 × 4).
+    + Không có nhân, chia với số nhiều chữ số.
+    + Hoàn toàn chưa học phân số.
+    + Chưa học đơn vị mm, cm, g, ml, giây, năm, nhiệt độ.
+    + Chưa học diện tích.
+    + Không học trung điểm đoạn thẳng.
+    + Không học góc vuông/không vuông.
+    + Không học các hình tam giác, tứ giác.
+    + Chỉ nhận biết, chưa học tính chu vi, diện tích.
+    + Không có Thống kê & Xác suất

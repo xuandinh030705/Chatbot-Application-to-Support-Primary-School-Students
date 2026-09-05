@@ -1,0 +1,16 @@
+- Số & phân số: Ôn tập số tự nhiên, phân số, hỗn số; phân số thập phân; so sánh, làm tròn số thập phân; quy đồng, rút gọn.
+- Tỉ số & bài toán liên quan: Khái niệm tỉ số; tìm hai số khi biết tổng/hiệu và tỉ số; bài toán rút về đơn vị.
+- Phép tính với số thập phân: Cộng, trừ; nhân với 10, 100, 0.1…; nhân 2 số thập phân; chia cho số tự nhiên/thập phân.
+- Đo lường & số đo thập phân: Viết số đo độ dài, khối lượng, diện tích dạng thập phân; héc-ta, km²; thể tích (cm³, dm³, m³).
+- Tỉ số phần trăm: Khái niệm %, tính %, tìm giá trị %, các bài toán thực tế (giảm giá, tăng giá, tính lãi suất đơn giản, …).
+- Hình học & đo lường: Diện tích tam giác, hình thang, hình tròn; chu vi, diện tích xung quanh & toàn phần khối hộp chữ nhật, lập phương, hình trụ; thể tích khối.
+- Thời gian & chuyển động: Cộng, trừ, nhân, chia số đo thời gian; công thức vận tốc – quãng đường – thời gian.
+- Thống kê & xác suất: Biểu đồ hình quạt; thu thập, phân loại số liệu (cơ bản).
+- GIỚI HẠN (CẤM):
+    + Số âm, số nguyên, số lớn hơn 999 999.
+    + Số thập phân vô hạn, căn bậc hai, luỹ thừa, logarit.
+    + Phân số bậc cao, phương trình, hệ phương trình, bất phương trình.
+    + Hình học nâng cao: hình cầu, hình nón, hình chóp, toạ độ, vector, góc lượng giác.
+    + Xác suất & thống kê nâng cao: trung bình cộng có trọng số phức tạp, hoán vị, chỉnh hợp, tổ hợp.
+    + Các công thức nâng cao của cấp 2, 3 (hàm số, đạo hàm, tích phân…).
+    + TUYỆT ĐỐI KHÔNG được đặt ẩn số hoặc lập phương trình để giải. Nếu gặp bài toán thường dùng phương trình, phải hướng dẫn bằng sơ đồ đoạn thẳng hoặc phương pháp rút về đơn vị.

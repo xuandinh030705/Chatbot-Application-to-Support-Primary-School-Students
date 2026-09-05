@@ -1,0 +1,142 @@
+# ==========================
+# Root - General
+# ==========================
+# Environment & secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Credentials
+*.pem
+*.key
+credentials.*
+secrets.*
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE
+.vscode/
+.idea/
+.history/
+*.swp
+*.swo
+*~
+
+# ==========================
+# Python (Backend)
+# ==========================
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual envs
+.venv/
+venv/
+env/
+ENV/
+.env/
+.conda/
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# pyenv
+.python-version
+
+# mypy / pyre / pytest / coverage
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# ==========================
+# Node (Frontend)
+# ==========================
+node_modules/
+node_modules
+dist/
+dist-ssr/
+build/
+out/
+.next/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Vite / TS build
+*.tsbuildinfo
+
+# ==========================
+# Logs & Databases
+# ==========================
+# Ignore log files but keep directory with .gitkeep
+*.log
+*.log.*
+*.sqlite3
+*.db
+# Ignore contents of logs folders, but keep the folder and .gitkeep
+logs/*
+**/logs/*
+!logs/.gitkeep
+!**/logs/.gitkeep
+
+# MySQL volume (docker)
+mysql_data/
+
+# ==========================
+# Large / Binary / Temp
+# ==========================
+*.pt
+*.pth
+*.ckpt
+*.bin
+*.safetensors
+*.onnx
+*.pkl
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+tmp/
+temp/
+.tmp/
+
+# ==========================
+# Data - keep data.json, ignore large datasets if any
+# ==========================
+# Uncomment if you have large datasets/models not to commit
+# data/*.csv
+# data/*.json
+# *.csv
+# !src/backend/data.json
+
+# ==========================
+# Frontend dist (build output)
+# ==========================
+src/frontend/dist/
+frontend/dist/
