@@ -1,7 +1,13 @@
-from langchain.agents import AgentExecutor, create_openai_functions_agent
+try:
+    from langchain.agents import AgentExecutor, create_openai_functions_agent
+except ImportError:
+    from langchain_classic.agents import AgentExecutor, create_openai_functions_agent
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.callbacks.base import BaseCallbackHandler
+try:
+    from langchain.callbacks.base import BaseCallbackHandler
+except ImportError:
+    from langchain_core.callbacks.base import BaseCallbackHandler
 from app.utils.chat_utils import convert_history
 from app.models.agent import AgentInput
 from app.core.agents.tools import math_tool
@@ -13,8 +19,17 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY not found in environment variables")
+if not GROQ_API_KEY or "dummy" in GROQ_API_KEY.lower():
+    from app.utils import logger as _logger
+    _logger.warning("GROQ_API_KEY missing or dummy - using mock mode for math_agent_ver3")
+    if not GROQ_API_KEY:
+        GROQ_API_KEY = "gsk_dummy"
+
+def _is_dummy(key):
+    return not key or "dummy" in key.lower()
+
+def _mock_text_v3(query, grade):
+    return f"🧪 [MOCK Solver→Checker] Thầy/cô chào con! Con hỏi: \"{query[:150]}\" (lớp {grade}). Đây là lời giải mẫu (mock do chưa có key thật):\n\nHiệu số ban đầu: 45 - 35 = 10\nTử số mới: 10 × 2 = 20\nSố a cần tìm: 35 - 20 = 15\n> Mock này minh họa format Solver→Checker. Điền GROQ_API_KEY thật để chạy LLM thật."
 
 
 class CustomHandler(BaseCallbackHandler):
@@ -112,6 +127,15 @@ Ví dụ: "INVALID: Dùng ẩn số x; Hướng sửa: viết bằng lời và p
 
 def math_agent_with_check(agent_input: AgentInput, max_retries: int = 3):
     """Vòng lặp tự động: Solver -> Checker -> sửa lại nếu invalid"""
+    if _is_dummy(GROQ_API_KEY):
+        logger.info("Returning mock for math_agent_ver3 due to dummy key")
+        mock = _mock_text_v3(agent_input.query, agent_input.grade)
+        if agent_input.stream:
+            def gen():
+                for w in mock.split(" "):
+                    yield w + " "
+            return gen()
+        return mock
     solver = create_solver_agent()
     checker = create_checker_agent()
     chat_history = convert_history(agent_input.history)

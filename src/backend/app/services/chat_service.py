@@ -99,7 +99,7 @@ class ChatService:
         result = self.get_messages(conversation_id=conv_id)
         return result
 
-    def ask(self, sender_id: str, content: str, stream: bool = False):
+    def ask(self, sender_id: str, content: str, stream: bool = False, model: Model = None):
         conv_id = self.get_or_create_active_conversation_id(sender_id)
         max_words = 200
 
@@ -120,15 +120,46 @@ class ChatService:
             logger.warning(f"User {sender_id} gửi input quá dài ({len(content.split())} từ)")
             warning_text = f"⚠️ Input quá dài (tối đa {max_words} từ). Vui lòng rút ngắn nội dung."
             user_chat = self.add(conv_id, ChatRole.USER, content)
+            if stream:
+                def _gen():
+                    for w in warning_text.split(" "):
+                        yield w + " "
+                return _gen()
             return _create_response(user_chat, warning_text)
 
         history = self.get_messages(conversation_id=conv_id, limit=5) or []
         logger.info(f"History: {history}")
 
         user = self.user_service.get(sender_id)
+        if not user:
+            logger.error(f"User not found: {sender_id}")
+            err_text = "Người dùng không tồn tại. Vui lòng đăng nhập lại."
+            if stream:
+                def _err_gen():
+                    yield err_text
+                return _err_gen()
+            # create dummy user msg for response
+            user_chat = self.add(conv_id, ChatRole.USER, content)
+            return _create_response(user_chat, err_text)
+
         user_chat = self.add(conv_id, ChatRole.USER, content)
 
+        # Handle model param - try to map string to Model enum
+        model_enum = None
+        if model is not None:
+            if isinstance(model, Model):
+                model_enum = model
+            elif isinstance(model, str):
+                try:
+                    model_enum = Model(model)
+                except ValueError:
+                    logger.warning(f"Unknown model {model}, default to gptoss120b")
+                    model_enum = Model.gptoss120b
+            else:
+                model_enum = model
+
         agent_input = AgentInput(
+            model=model_enum,
             stream=stream,
             query=content,
             role=user.role,
@@ -137,7 +168,48 @@ class ChatService:
             history=history
         )
 
+        # Streaming mode: return generator that yields chunks and saves final
+        if stream:
+            result = math_agent(agent_input)
+            # math_agent may return generator (mock) or string
+            if hasattr(result, '__iter__') and not isinstance(result, (str, bytes)):
+                # generator case
+                def _stream_gen():
+                    full_text = ""
+                    try:
+                        for chunk in result:
+                            if chunk:
+                                full_text += chunk
+                                yield chunk
+                    except Exception as e:
+                        logger.error(f"Streaming error: {e}")
+                        yield f"[ERROR] {str(e)}"
+                    # Save final assistant message after streaming
+                    if full_text:
+                        try:
+                            self.add(conv_id, ChatRole.ASSISTANT, full_text)
+                            logger.info(f"Saved streamed response length {len(full_text)}")
+                        except Exception as e:
+                            logger.error(f"Failed to save streamed response: {e}")
+                return _stream_gen()
+            else:
+                # string case - split into chunks for SSE
+                full_text = str(result)
+                def _str_gen():
+                    for w in full_text.split(" "):
+                        yield w + " "
+                    # save
+                    try:
+                        self.add(conv_id, ChatRole.ASSISTANT, full_text)
+                    except Exception as e:
+                        logger.error(f"Failed to save streamed response: {e}")
+                return _str_gen()
+
         response_text = math_agent(agent_input)
+        # If math_agent returned generator even in non-stream (should not), handle
+        if hasattr(response_text, '__iter__') and not isinstance(response_text, (str, bytes)):
+            # collect generator
+            response_text = "".join(list(response_text))
 
         response = _create_response(user_chat, response_text)
         logger.info(f"Response: {response}")

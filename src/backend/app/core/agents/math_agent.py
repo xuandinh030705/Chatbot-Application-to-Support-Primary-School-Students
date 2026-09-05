@@ -1,5 +1,8 @@
 from langchain_openai import ChatOpenAI
-from langchain.schema import HumanMessage, SystemMessage
+try:
+    from langchain.schema import HumanMessage, SystemMessage
+except ImportError:
+    from langchain_core.messages import HumanMessage, SystemMessage
 
 from enum import Enum
 from typing import Dict, Optional
@@ -10,8 +13,11 @@ from app.utils.logger_utils import logger
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY not found in environment variables")
+if not OPENAI_API_KEY or "dummy" in OPENAI_API_KEY.lower():
+    logger.warning("OPENAI_API_KEY missing or dummy - using mock mode for math_agent.py")
+    # Don't raise - allow import with mock
+    if not OPENAI_API_KEY:
+        OPENAI_API_KEY = "sk-dummy"
 
 
 # =========================

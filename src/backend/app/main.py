@@ -17,8 +17,16 @@ origins = [
     "http://localhost:3111",  # local vite
     "http://127.0.0.1:3111",
     "http://127.0.0.1:3999",
+    "http://localhost:5173",  # vite default (docker-compose)
+    "http://127.0.0.1:5173",
+    "http://localhost:3999",  # vite config port
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
     "https://cacciatore-ilse-nonrecessive.ngrok-free.app",  # ngrok FE
 ]
+# Also allow FRONTEND_URL dynamically
+if FRONTEND_URL and FRONTEND_URL not in origins:
+    origins.append(FRONTEND_URL)
 
 container = Container()
 app = FastAPI()

@@ -1,9 +1,18 @@
-from langchain.agents import AgentExecutor, create_openai_functions_agent
+try:
+    from langchain.agents import AgentExecutor, create_openai_functions_agent
+except ImportError:
+    from langchain_classic.agents import AgentExecutor, create_openai_functions_agent
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
-from langchain.callbacks.base import BaseCallbackHandler
+try:
+    from langchain.callbacks.base import BaseCallbackHandler
+except ImportError:
+    from langchain_core.callbacks.base import BaseCallbackHandler
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.agents import initialize_agent, AgentType
+try:
+    from langchain.agents import initialize_agent, AgentType
+except ImportError:
+    from langchain_classic.agents import initialize_agent, AgentType
 
 from app.utils.chat_utils import convert_history
 
@@ -17,12 +26,22 @@ from dotenv import load_dotenv
 load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    raise ValueError("OPENAI_API_KEY not found in environment variables")
+if not OPENAI_API_KEY or "dummy" in OPENAI_API_KEY.lower():
+    logger.warning("OPENAI_API_KEY missing or dummy - using mock mode for math_agent_ver2")
+    if not OPENAI_API_KEY:
+        OPENAI_API_KEY = "sk-dummy"
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY not found in environment variables")
+if not GROQ_API_KEY or "dummy" in GROQ_API_KEY.lower():
+    logger.warning("GROQ_API_KEY missing or dummy - using mock mode for math_agent_ver2")
+    if not GROQ_API_KEY:
+        GROQ_API_KEY = "gsk_dummy"
+
+def _is_dummy(key):
+    return not key or "dummy" in key.lower()
+
+def _mock_text(query, grade, history):
+    return f"🧪 [MOCK - ver2] Thầy/cô chào con! Con hỏi: \"{query[:150]}\" (lớp {grade}). Đây là hướng dẫn mẫu (do chưa cấu hình API key thật):\n\n- Bước 1: Đọc kỹ đề, xác định dạng toán (tổng-hiệu, tỉ số, vận tốc...)\n- Bước 2: Vẽ sơ đồ đoạn thẳng nếu có thể\n- Bước 3: Thực hiện phép tính từng bước, không dùng ẩn x\n- Bước 4: Tự kiểm tra lại và viết lời đáp\n\n> Để có lời giải thật từ GPT-4/Groq, hãy điền key thật vào src/backend/.env nhé!"
 
 
 class CustomHandler(BaseCallbackHandler):
@@ -49,7 +68,18 @@ class CustomHandler(BaseCallbackHandler):
         logger.info(output)
 
 
-def math_agent(agent_input: AgentInput) -> AgentExecutor:
+def math_agent(agent_input: AgentInput):
+    # Mock mode when dummy keys
+    if _is_dummy(OPENAI_API_KEY) or _is_dummy(GROQ_API_KEY):
+        logger.info("Returning mock response for dummy keys in math_agent_ver2")
+        mock = _mock_text(agent_input.query, agent_input.grade, agent_input.history)
+        if agent_input.stream:
+            def gen():
+                for w in mock.split(" "):
+                    yield w + " "
+            return gen()
+        return mock
+
     system_message = """
      Bạn là một giáo viên tiểu học dạy Toán tiểu học.
 

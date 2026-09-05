@@ -83,6 +83,7 @@ async def ask_stream(
             for chunk in chat_service.ask(
                     sender_id=sender_id,
                     content=content,
+                    stream=True,
                     model=model
             ):
                 yield f"data: {chunk}\n\n"

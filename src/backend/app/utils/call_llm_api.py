@@ -11,6 +11,22 @@ if find_dotenv():
     load_dotenv()
 
 
+def _is_dummy_key(key: str) -> bool:
+    if not key:
+        return True
+    return key.startswith("sk-dummy") or key.startswith("gsk_dummy") or "dummy" in key.lower()
+
+def _mock_response(context, model):
+    # Simple mock for demo without real API keys
+    last_user = ""
+    if context:
+        for msg in reversed(context):
+            if msg.get("role") == "user":
+                last_user = msg.get("content", "")
+                break
+    mock_text = f"🧪 [DEMO MOCK - chưa cấu hình API key thật] \n\nBạn hỏi: \"{last_user[:200]}\" \n\nĐây là câu trả lời mẫu cho chương trình tiểu học lớp 5:\n\n- Bước 1: Phân tích đề bài và xác định dạng toán\n- Bước 2: Tóm tắt bằng sơ đồ đoạn thẳng (nếu cần)\n- Bước 3: Thực hiện phép tính cơ bản\n- Bước 4: Tự kiểm tra lại kết quả\n\n> Lưu ý: Để có lời giải thật từ AI, hãy điền OPENAI_API_KEY / GROQ_API_KEY thật vào file `src/backend/.env` và restart backend.\nModel yêu cầu: {model}"
+    return mock_text
+
 def call_openai_api(
         model: Optional[str] = "gpt-4o",
         context: list = None,
@@ -23,6 +39,18 @@ def call_openai_api(
 
     if not api_key:
         raise ValueError(f"API key cho OPENAI chưa được thiết lập trong .env")
+
+    # Mock mode for demo without real keys
+    if _is_dummy_key(api_key):
+        logger.warning(f"Using MOCK OpenAI response (dummy key) for model {model}")
+        mock_text = _mock_response(context, model)
+        if stream:
+            def mock_generator():
+                # stream word by word for demo
+                for word in mock_text.split(" "):
+                    yield word + " "
+            return mock_generator()
+        return mock_text
 
     headers = {
         "Content-Type": "application/json",
@@ -81,6 +109,16 @@ def call_groq_api(context, model="openai/gpt-oss-120b", temperature=1.0, max_tok
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
         raise ValueError("GROQ_API_KEY chưa được thiết lập")
+
+    if _is_dummy_key(api_key):
+        logger.warning(f"Using MOCK Groq response (dummy key) for model {model}")
+        mock_text = _mock_response(context, model)
+        if stream:
+            def mock_generator():
+                for word in mock_text.split(" "):
+                    yield word + " "
+            return mock_generator()
+        return mock_text
 
     client = Groq(api_key=api_key)
     if stream:
